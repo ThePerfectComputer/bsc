@@ -1,3 +1,6 @@
+# generated for the haskell language server
+hie.yaml
+
 # Ignore Haskell files that are auto-generated and not checked in
 BuildVersion.hs
 BuildSystem.hs

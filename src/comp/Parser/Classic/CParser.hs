@@ -47,12 +47,18 @@ pPackage :: CParser CPackage
 pPackage =
     (l L_package ..+
     pModId +.+ pExports +.+ l L_where ..+
-    block noTrig
+    (block noTrig
         (sepBy pImport dsm +.+ osm ..+
             sepBy pFixity dsm +.+ osm ..+
-            pDefns) +..
+            pDefns)) +..
                 osm >>>>>> (\ a b c d e -> CPackage a b c d e [])) +..
                     eof
+
+-- pPackage1 :: CParser CPackage
+-- pPackage1 = l L_package ..+ pModId
+t = b1 ..+ b2 +.. osm
+b1 = l L_package ..+ pModId +.+ pExports +.+ l L_where
+b2 = block noTrig (sepBy pImport dsm +.+ osm ..+ sepBy pFixity dsm +.+ osm ..+ pDefns)
 
 pExports :: CParser (Either [CExport] [CExport])
 pExports  =  (lp ..+ sepBy pExpId cm +.. rp >>- Left)

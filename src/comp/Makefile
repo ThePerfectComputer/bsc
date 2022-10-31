@@ -252,7 +252,7 @@ BUILDSTART = @echo $@ start `date`
 BUILDDONE = @echo $@ done `date`; echo
 
 PREBUILDCOMMAND = $(BUILDSTART); mkdir -p $(BUILDDIR)
-BUILDCOMMAND = $(GHC) -hidir $(BUILDDIR) -odir $(BUILDDIR) -stubdir $(BUILDDIR)
+BUILDCOMMAND = $(GHC) --make -hidir $(BUILDDIR) -odir $(BUILDDIR) -stubdir $(BUILDDIR)
 POSTBUILDCOMMAND = $(BUILDDONE)
 
 # While GHCFLAGS contains the sum of all -I flags for every tool

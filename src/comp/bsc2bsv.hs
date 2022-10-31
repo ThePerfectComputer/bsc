@@ -19,6 +19,18 @@ main =
          [fn] -> readFile fn >>= bsc2bsv fn
          _ -> error "usage: bsc2bsv filename"
 
+-- get_tokens "/Users/yehowshuaimmanuel/git/bsc-yehowshua/testsuite/bsc.typechecker/deriving/scope/AbstractList.bs"
+getTokens :: FilePath -> IO [Token]
+getTokens fn = 
+  do 
+    readFile fn >>= bscTokens fn
+
+bscTokens :: Monad m => String -> String -> m [Token]
+bscTokens filename text =
+  return $ lexStart lflags (mkFString filename) text
+  where lflags = LFlags { lf_is_stdlib = False,
+                             lf_allow_sv_kws = True}
+
 bsc2bsv :: String -> String -> IO ()
 bsc2bsv filename text =
     do let lflags = LFlags { lf_is_stdlib = False,
@@ -28,5 +40,5 @@ bsc2bsv filename text =
          Left  (ss, tokens') -> let es = [errSyntax [s | s@(_:_) <- ss] tokens']
                                 in  CE.throw $ CE.ErrorCall (showErrorList es)
          Right ((package,_):_) ->
-           putStrLn $ pvpReadable package
+           putStrLn $ "so cool!"
          Right [] -> internalError "bsc2bsv: parse succeeded with no packages"
