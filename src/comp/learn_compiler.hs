@@ -10,6 +10,9 @@ import PVPrint
 import CVPrint()
 import Lex
 import Error(internalError, showErrorList)
+import qualified Id(Id, mkId, dummyId, emptyId)
+
+t a b c d = Id.Id a b c d
 
 main :: IO ()
 main =
