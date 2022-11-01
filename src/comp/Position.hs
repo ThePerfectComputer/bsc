@@ -16,7 +16,7 @@ data Position = Position {
     pos_line :: !Int,
     pos_column :: !Int,
     pos_is_stdlib :: !Bool
-} deriving (Generic.Data, Generic.Typeable)
+} deriving (Generic.Data, Generic.Typeable, Show)
 
 mkPosition :: FString -> Int -> Int -> Position
 mkPosition f l c = Position f l c False
@@ -33,8 +33,8 @@ instance Ord Position where
 class HasPosition a where
     getPosition :: a -> Position
 
-instance Show Position where
-    show p = prPosition p
+-- instance Show Position where
+--     show p = prPosition p
 
 instance Hyper Position where
     hyper p y = p `seq` y

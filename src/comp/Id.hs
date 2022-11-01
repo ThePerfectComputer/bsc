@@ -172,14 +172,14 @@ data Id = Id { id_pos :: !Position,
                id_fs :: !FString,
                id_props :: [IdProp] {- , id_stab :: Int -}
              }
-     deriving (Generic.Data,Generic.Typeable)
+     deriving (Generic.Data,Generic.Typeable, Show)
 
 show_raw_id :: Bool
 show_raw_id = "-show-raw-id" `elem` progArgs
 
-instance Show Id where
-    show | show_raw_id = show_full
-         | otherwise   = show_brief
+-- instance Show Id where
+--     show | show_raw_id = show_full
+--          | otherwise   = show_brief
 
 show_brief :: Id -> String
 show_brief i =

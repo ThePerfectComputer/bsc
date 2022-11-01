@@ -304,6 +304,12 @@ bsc2bsv: $(SOURCES)
 	$(BUILDCOMMAND) -main-is Main_$@ $(BUILDFLAGS) $(RTSFLAGS)
 	$(POSTBUILDCOMMAND)
 
+.PHONY: learn_compiler
+learn_compiler: $(SOURCES)
+	$(PREBUILDCOMMAND)
+	$(BUILDCOMMAND) -main-is Main_$@ $(BUILDFLAGS) $(RTSFLAGS)
+	$(POSTBUILDCOMMAND)
+
 .PHONY: bsv2bsc
 bsv2bsc: $(SOURCES)
 	$(PREBUILDCOMMAND)
