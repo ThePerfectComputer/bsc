@@ -11,8 +11,14 @@ import CVPrint()
 import Lex
 import Error(internalError, showErrorList)
 import qualified Id(Id, mkId, dummyId, emptyId)
+import Position (Position)
 
-t a b c d = Id.Id a b c d
+-- t a b c d = Id.Id a b c d
+mkId :: Position -> FString -> Id.Id
+mkId pos fs =
+    let value = Id.Id pos fsEmpty fs []
+    in -- trace("ID: " ++ (ppReadable value)) $
+       value
 
 main :: IO ()
 main =
